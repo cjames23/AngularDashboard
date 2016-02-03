@@ -1,0 +1,17 @@
+﻿<div class="jumbotron">
+    <h2>Lingering Totes</h2>
+    <div class="row">
+        <div ng-controller="totesCtrl">
+            <table ng-cloak class="table-bordered">
+                <tr>
+                    <th class="col-md-4">Tote Number</th>
+                    <th class="col-md-4">Number of Orders</th>
+                </tr>
+                <tr data-ng-repeat="tote in totes">
+                    <td class="col-md-4" ng-bind="tote.ToteNumber">{{ tote.ToteNumber }}</td>
+                    <td class="col-md-4">{{ tote.OrdersinTote }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿<form class="form-group" role="form" ng-controller="messageCtrl">
+    <div class="form-group">
+        <label>Message</label>
+        <textarea class="form-control" rows="5" id="message"></textarea>
+    </div>
+        <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
+        <button type="submit" class="btn btn-primary" ng-click="pop()">Send</button>
+        <button type="reset" class="btn btn-danger">Reset</button>
+</form>

@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="METRICS_REPORTINGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgingTotes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ToteNumber" Type="varchar" MaxLength="255" />
+          <Property Name="OrdersinTote" Type="int" />
+        </EntityType>
+        <EntityType Name="CurrentShippedOrders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="OrderType" Type="varchar" MaxLength="12" />
+          <Property Name="Units" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'METRICS_REPORTING.dbo.vw_AverageOrderAges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_AverageOrderAges">
+          <Key>
+            
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="OrderType" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="AvgOrderAge" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'METRICS_REPORTING.dbo.vw_CurrentErrorRate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_CurrentErrorRate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="OrderErrorRate" Type="decimal" Precision="37" Scale="19" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'METRICS_REPORTING.dbo.vw_exceptions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_exceptions">
+          <Key>
+            <PropertyRef Name="usr_id" />
+            <PropertyRef Name="exception_type" />
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="usr_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="exception_type" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="item_id" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="Units" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'METRICS_REPORTING.dbo.vw_LanePicks' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_LanePicks">
+          <Key>
+            
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Lane" Type="varchar" MaxLength="15" />
+          <Property Name="Orderdate" Type="date" />
+          <Property Name="Otype" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="Orders" Type="int" />
+          <Property Name="Units" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'METRICS_REPORTING.dbo.vw_LaneWaves' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_LaneWaves">
+          <Key>
+            
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Lane" Type="char" MaxLength="15" />
+          <Property Name="Orderdate" Type="date" />
+          <Property Name="OType" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="Orders" Type="int" />
+          <Property Name="Units" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'METRICS_REPORTING.dbo.vw_StaleWorkOrderCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_StaleWorkOrderCount">
+          <Key>
+            <PropertyRef Name="worknumber" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="worknumber" Type="numeric" Precision="13" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="METRICS_REPORTINGModelStoreContainer">
+          <EntitySet Name="AgingTotes" EntityType="Self.AgingTotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrentShippedOrders" EntityType="Self.CurrentShippedOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_AverageOrderAges" EntityType="Self.vw_AverageOrderAges" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_AverageOrderAges].[ID] AS [ID], 
+    [vw_AverageOrderAges].[OrderType] AS [OrderType], 
+    [vw_AverageOrderAges].[AvgOrderAge] AS [AvgOrderAge]
+    FROM [dbo].[vw_AverageOrderAges] AS [vw_AverageOrderAges]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_CurrentErrorRate" EntityType="Self.vw_CurrentErrorRate" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_CurrentErrorRate].[ID] AS [ID], 
+    [vw_CurrentErrorRate].[OrderErrorRate] AS [OrderErrorRate]
+    FROM [dbo].[vw_CurrentErrorRate] AS [vw_CurrentErrorRate]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_exceptions" EntityType="Self.vw_exceptions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_exceptions].[usr_id] AS [usr_id], 
+    [vw_exceptions].[exception_type] AS [exception_type], 
+    [vw_exceptions].[item_id] AS [item_id], 
+    [vw_exceptions].[Units] AS [Units]
+    FROM [dbo].[vw_exceptions] AS [vw_exceptions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_LanePicks" EntityType="Self.vw_LanePicks" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_LanePicks].[Id] AS [Id], 
+    [vw_LanePicks].[Lane] AS [Lane], 
+    [vw_LanePicks].[Orderdate] AS [Orderdate], 
+    [vw_LanePicks].[Otype] AS [Otype], 
+    [vw_LanePicks].[Orders] AS [Orders], 
+    [vw_LanePicks].[Units] AS [Units]
+    FROM [dbo].[vw_LanePicks] AS [vw_LanePicks]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_LaneWaves" EntityType="Self.vw_LaneWaves" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_LaneWaves].[ID] AS [ID], 
+    [vw_LaneWaves].[Lane] AS [Lane], 
+    [vw_LaneWaves].[Orderdate] AS [Orderdate], 
+    [vw_LaneWaves].[OType] AS [OType], 
+    [vw_LaneWaves].[Orders] AS [Orders], 
+    [vw_LaneWaves].[Units] AS [Units]
+    FROM [dbo].[vw_LaneWaves] AS [vw_LaneWaves]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_StaleWorkOrderCount" EntityType="Self.vw_StaleWorkOrderCount" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_StaleWorkOrderCount].[Id] AS [Id], 
+    [vw_StaleWorkOrderCount].[worknumber] AS [worknumber]
+    FROM [dbo].[vw_StaleWorkOrderCount] AS [vw_StaleWorkOrderCount]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="METRICS_REPORTINGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="vw_exceptions">
+          <Key>
+            <PropertyRef Name="usr_id" />
+            <PropertyRef Name="exception_type" />
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="usr_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="exception_type" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="item_id" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Units" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vw_LanePicks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Lane" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Orderdate" Type="DateTime" Precision="0" />
+          <Property Name="Otype" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Orders" Type="Int32" />
+          <Property Name="Units" Type="Double" />
+        </EntityType>
+        <EntityType Name="vw_LaneWaves">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Lane" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Orderdate" Type="DateTime" Precision="0" />
+          <Property Name="OType" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Orders" Type="Int32" />
+          <Property Name="Units" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="METRICS_REPORTINGEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="vw_exceptions" EntityType="Self.vw_exceptions" />
+          <EntitySet Name="vw_LanePicks" EntityType="Self.vw_LanePicks" />
+          <EntitySet Name="vw_LaneWaves" EntityType="Self.vw_LaneWaves" />
+          <EntitySet Name="CurrentShippedOrders" EntityType="METRICS_REPORTINGModel.CurrentShippedOrders" />
+          <EntitySet Name="vw_AverageOrderAges" EntityType="METRICS_REPORTINGModel.vw_AverageOrderAges" />
+          <EntitySet Name="vw_StaleWorkOrderCount" EntityType="METRICS_REPORTINGModel.vw_StaleWorkOrderCount" />
+          <EntitySet Name="vw_CurrentErrorRate" EntityType="METRICS_REPORTINGModel.vw_CurrentErrorRate" />
+          <EntitySet Name="AgingTotes" EntityType="METRICS_REPORTINGModel.AgingTotes" />
+        </EntityContainer>
+        <EntityType Name="CurrentShippedOrders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="OrderType" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Units" Type="Double" />
+        </EntityType>
+        <EntityType Name="vw_AverageOrderAges">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="OrderType" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="AvgOrderAge" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vw_StaleWorkOrderCount">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="worknumber" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="worknumber" Type="Decimal" Nullable="false" Precision="13" Scale="0" />
+        </EntityType>
+        <EntityType Name="vw_CurrentErrorRate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="OrderErrorRate" Type="Decimal" Precision="37" Scale="19" />
+        </EntityType>
+        <EntityType Name="AgingTotes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ToteNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OrdersinTote" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="METRICS_REPORTINGModelStoreContainer" CdmEntityContainer="METRICS_REPORTINGEntities">
+          <EntitySetMapping Name="vw_exceptions">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.vw_exceptions">
+              <MappingFragment StoreEntitySet="vw_exceptions">
+                <ScalarProperty Name="usr_id" ColumnName="usr_id" />
+                <ScalarProperty Name="exception_type" ColumnName="exception_type" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_LanePicks">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.vw_LanePicks">
+              <MappingFragment StoreEntitySet="vw_LanePicks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Lane" ColumnName="Lane" />
+                <ScalarProperty Name="Orderdate" ColumnName="Orderdate" />
+                <ScalarProperty Name="Otype" ColumnName="Otype" />
+                <ScalarProperty Name="Orders" ColumnName="Orders" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_LaneWaves">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.vw_LaneWaves">
+              <MappingFragment StoreEntitySet="vw_LaneWaves">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Lane" ColumnName="Lane" />
+                <ScalarProperty Name="Orderdate" ColumnName="Orderdate" />
+                <ScalarProperty Name="OType" ColumnName="OType" />
+                <ScalarProperty Name="Orders" ColumnName="Orders" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrentShippedOrders">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.CurrentShippedOrders">
+              <MappingFragment StoreEntitySet="CurrentShippedOrders">
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_AverageOrderAges">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.vw_AverageOrderAges">
+              <MappingFragment StoreEntitySet="vw_AverageOrderAges">
+                <ScalarProperty Name="AvgOrderAge" ColumnName="AvgOrderAge" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_StaleWorkOrderCount">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.vw_StaleWorkOrderCount">
+              <MappingFragment StoreEntitySet="vw_StaleWorkOrderCount">
+                <ScalarProperty Name="worknumber" ColumnName="worknumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_CurrentErrorRate">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.vw_CurrentErrorRate">
+              <MappingFragment StoreEntitySet="vw_CurrentErrorRate">
+                <ScalarProperty Name="OrderErrorRate" ColumnName="OrderErrorRate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgingTotes">
+            <EntityTypeMapping TypeName="METRICS_REPORTINGModel.AgingTotes">
+              <MappingFragment StoreEntitySet="AgingTotes">
+                <ScalarProperty Name="OrdersinTote" ColumnName="OrdersinTote" />
+                <ScalarProperty Name="ToteNumber" ColumnName="ToteNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

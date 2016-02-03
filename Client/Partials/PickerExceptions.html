@@ -1,0 +1,21 @@
+﻿<div class="jumbotron">
+    <h2>Exceptions Last Hour</h2>
+    <div class="row">
+        <div ng-controller="PickExceptionController">
+            <table ng-cloak class="table-bordered">
+                <tr>
+                    <th class="col-md-2">Id</th>
+                    <th class="col-md-4">Error Type</th>
+                    <th class="col-md-2">Item Id</th>
+                    <th class="col-md-2">Units</th>
+                </tr>
+                <tr data-ng-repeat="except in pickerexcepts">
+                    <td class="col-md-2" ng-bind="except.usr_id"></td>
+                    <td class="col-md-4" ng-bind="except.exception_type"></td>
+                    <td class="col-md-2" ng-bind="except.item_id"></td>
+                    <td class="col-md-2" ng-bind="except.Units"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

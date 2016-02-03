@@ -1,0 +1,24 @@
+﻿<div class="jumbotron">
+    <h2>Picks Per Lane</h2>
+    <div class="row">
+        <div  ng-controller="picksController">
+            <table ng-cloak class="table-bordered">
+                <tr>
+                    <th class="col-md-2">Lane</th>
+                    <th class="col-md-2">OrderDate</th>
+                    <th class="col-md-3">OrderType</th>
+                    <th class="col-md-2">Orders</th>
+                    <th class="col-md-2">Units</th>
+                </tr>
+
+                <tr data-ng-repeat="pick in picks">
+                    <td class="col-md-2" ng-bind="pick.Lane"></td>
+                    <td class="col-md-2" ng-bind="pick.Orderdate | date:'MM/d/yy'"></td>
+                    <td class="col-md-3" ng-bind="pick.Otype"></td>
+                    <td class="col-md-2" ng-bind="pick.Orders"></td>
+                    <td class="col-md-2" ng-bind="pick.Units"></td>                  
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

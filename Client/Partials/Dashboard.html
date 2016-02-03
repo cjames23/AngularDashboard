@@ -1,0 +1,110 @@
+﻿  <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12 huge">
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i>Dashboard
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-tachometer fa-fw"></i>Oldest Standard Order Age</h3>
+            </div>
+            <div class="panel-body" ng-controller="orderAgeCtrl">
+                <div class="huge text-center" ng-class="{'text-success': order.AvgOrderAge <= 24, 'text-warning': order.AvgOrderAge > 24  && order.AvgOrderAge <= 48, 'text-danger': order.AvgOrderAge > 48}" ng-repeat="order in orderAge | filter: { OrderType: 'Standard'}:true">{{  order.AvgOrderAge }} hours</div>
+            </div>
+            <div class="text-right">
+                <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-tachometer fa-fw"></i>Oldest Expedited Order Age</h3>
+            </div>
+            <div class="panel-body" ng-controller="orderAgeCtrl">
+    <div class="huge text-center" ng-class="{'text-success': order.AvgOrderAge <= 24, 'text-warning': order.AvgOrderAge > 24  && order.AvgOrderAge <= 48, 'text-danger': order.AvgOrderAge > 48}" ng-repeat="order in orderAge | filter: { OrderType: 'Expedited'}:true">{{  order.AvgOrderAge }} hours</div>
+</div>
+            <div class="text-right">
+                <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-tachometer fa-fw"></i>Oldest Inscription Order Age</h3>
+            </div>
+            <div class="panel-body" ng-controller="orderAgeCtrl">
+                <div class="huge text-center" ng-class="{'text-success': order.AvgOrderAge <= 72, 'text-warning': order.AvgOrderAge > 72  && order.AvgOrderAge <= 96, 'text-danger': order.AvgOrderAge > 96}" ng-repeat="order in orderAge | filter: { OrderType: 'Inscriptions'}:true">{{  order.AvgOrderAge }} hours</div>
+            </div>
+            <div class="text-right">
+                <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bullseye fa-fw"></i>Current Error Rate</h3>
+            </div>
+            <div class="panel-body" ng-controller="errorRateCtrl">
+                <div class="huge text-center" ng-class="{'text-success': error.OrderErrorRate <= .0075, 'text-warning': error.OrderErrorRate> .0075 && error.OrderErrorRate <= .01, 'text-danger': error.OrderErrorRate > .01}" ng-repeat="error in errorRate">{{ error.OrderErrorRate * 100 | number: 2 }}%</div>
+            </div>
+            <div class="text-right">
+                <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-arrow-up fa-fw"></i>Aging Work Orders</h3>
+            </div>
+            <div class="panel-body" ng-controller="workOrderCtrl" >
+                <div class="huge text-danger text-center">{{ workOrderCount.length  + 1}}</div>
+            </div>
+            <div class="text-right">
+                <a href="#/WorkOrders">View Details <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-arrow-up fa-fw"></i>Lingering Totes</h3>
+            </div>
+            <div class="panel-body" ng-controller="totesCtrl">
+                <div class="huge text-center" ng-class="{'text-success': totes.length == 0, 'text-danger': totes.length > 0}">{{ totes.length }}</div>
+            </div>
+            <div class="text-right">
+                <a href="#/totes">View Details <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i>Shipped Units</h3>
+            </div>
+            <div class="panel-body" ng-controller="graphCtrl">
+                <canvas id="doughnut" class="chart chart-doughnut"
+                        chart-data="data" chart-labels="labels" chart-legend="true"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

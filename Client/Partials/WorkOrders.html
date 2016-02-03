@@ -1,0 +1,15 @@
+﻿<div class="jumbotron">
+    <h2>Aging Work Orders</h2>
+    <div class="row">
+        <div>
+            <table ng-cloak class="table-bordered">
+                <tr>
+                    <th class="col-md-4">Work Order Number</th>
+                </tr>
+                <tr data-ng-repeat="work in workOrderCount">
+                    <td class="col-md-4" ng-bind="work.worknumber">{{ work.worknumber }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

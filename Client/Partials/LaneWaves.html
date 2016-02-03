@@ -1,0 +1,24 @@
+﻿<div class="jumbotron">
+    <h2>Waves Per Lane</h2>
+    <div class="row">
+        <div  ng-controller="waveController">
+            <table ng-cloak class="table-bordered">
+                <tr>
+                    <th class="col-md-2">Lane</th>
+                    <th class="col-md-2">OrderDate</th>
+                    <th class="col-md-3">OrderType</th>
+                    <th class="col-md-2">Orders</th>
+                    <th class="col-md-2">Units</th>
+                </tr>
+                <tr data-ng-repeat="wave in waves">
+                    <td class="col-md-2" ng-bind="wave.Lane">{{wave.Lane}}</td>
+                    <td class="col-md-2">{{wave.Orderdate | date:'MM/d/yy'}}</td>
+                    <td class="col-md-3">{{wave.OType}}</td>
+                    <td class="col-md-2">{{wave.Orders}}</td>
+                    <td class="col-md-2">{{wave.Units}}</td>                  
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
